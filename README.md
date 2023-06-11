@@ -35,166 +35,22 @@ use({
 }
 ```
 
-## Configuration
-
-`gpt4all.nvim` comes with the following defaults, you can override them by passing config as setup param
-
-```lua
-{
-    api_key_cmd = nil,
-    yank_register = "+",
-    edit_with_instructions = {
-      diff = false,
-      keymaps = {
-        accept = "<C-y>",
-        toggle_diff = "<C-d>",
-        toggle_settings = "<C-o>",
-        cycle_windows = "<Tab>",
-        use_output_as_input = "<C-i>",
-      },
-    },
-    chat = {
-      welcome_message = WELCOME_MESSAGE,
-      loading_text = "Loading, please wait ...",
-      question_sign = "",
-      answer_sign = "ﮧ",
-      max_line_length = 120,
-      sessions_window = {
-        border = {
-          style = "rounded",
-          text = {
-            top = " Sessions ",
-          },
-        },
-        win_options = {
-          winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-        },
-      },
-      keymaps = {
-        close = { "<C-c>" },
-        yank_last = "<C-y>",
-        yank_last_code = "<C-k>",
-        scroll_up = "<C-u>",
-        scroll_down = "<C-d>",
-        new_session = "<C-n>",
-        cycle_windows = "<Tab>",
-        cycle_modes = "<C-f>",
-        select_session = "<Space>",
-        rename_session = "r",
-        delete_session = "d",
-        draft_message = "<C-d>",
-        toggle_settings = "<C-o>",
-        toggle_message_role = "<C-r>",
-        toggle_system_role_open = "<C-s>",
-      },
-    },
-    popup_layout = {
-      default = "center",
-      center = {
-        width = "80%",
-        height = "80%",
-      },
-      right = {
-        width = "30%",
-        width_settings_open = "50%",
-      },
-    },
-    popup_window = {
-      border = {
-        highlight = "FloatBorder",
-        style = "rounded",
-        text = {
-          top = " ChatGPT ",
-        },
-      },
-      win_options = {
-        wrap = true,
-        linebreak = true,
-        foldcolumn = "1",
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-      },
-      buf_options = {
-        filetype = "markdown",
-      },
-    },
-    system_window = {
-      border = {
-        highlight = "FloatBorder",
-        style = "rounded",
-        text = {
-          top = " SYSTEM ",
-        },
-      },
-      win_options = {
-        wrap = true,
-        linebreak = true,
-        foldcolumn = "2",
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-      },
-    },
-    popup_input = {
-      prompt = "  ",
-      border = {
-        highlight = "FloatBorder",
-        style = "rounded",
-        text = {
-          top_align = "center",
-          top = " Prompt ",
-        },
-      },
-      win_options = {
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-      },
-      submit = "<C-Enter>",
-      submit_n = "<Enter>",
-    },
-    settings_window = {
-      border = {
-        style = "rounded",
-        text = {
-          top = " Settings ",
-        },
-      },
-      win_options = {
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-      },
-    },
-    openai_params = {
-      model = "gpt-3.5-turbo",
-      frequency_penalty = 0,
-      presence_penalty = 0,
-      max_tokens = 300,
-      temperature = 0,
-      top_p = 1,
-      n = 1,
-    },
-    openai_edit_params = {
-      model = "code-davinci-edit-001",
-      temperature = 0,
-      top_p = 1,
-      n = 1,
-    },
-    actions_paths = {},
-    show_quickfixes_cmd = "Trouble quickfix",
-    predefined_chat_gpt_prompts = "https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv",
-  }
-```
+For configuration [see upstream](https://github.com/jackMort/ChatGPT.nvim/).
 
 ## Usage
 
 Plugin exposes following commands:
 
-#### `ChatGPT`
+#### `GPT4ALL`
 `ChatGPT` command which opens interactive window using the `gpt-3.5-turbo`
 model.
-(also known as `ChatGPT`)
 
-#### `ChatGPTActAs`
+#### `GPT4ALLActAs`
 `ChatGPTActAs` command which opens a prompt selection from [Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts) to be used with the `gpt-3.5-turbo` model.
 
 ![preview image](https://github.com/jackMort/ChatGPT.nvim/blob/media/preview-3.png?raw=true)
 
-#### `ChatGPTEditWithInstructions`
+#### `GPT4ALLEditWithInstructions`
 `ChatGPTEditWithInstructions` command which opens interactive window to edit selected text or whole window using the `code-davinci-edit-002` model (GPT 3.5 fine-tuned for coding).
 
 You can map it usig the Lua API, e.g. using `which-key.nvim`:
@@ -220,7 +76,7 @@ wk.register({
 
 ![preview image](https://github.com/jackMort/ChatGPT.nvim/blob/media/preview.png?raw=true)
 
-#### `ChatGPTRun`
+#### `GPT4ALLRun`
 
 `ChatGPTRun [action]` command which runs specific actions -- see [`actions.json`](./lua/chatgpt/flows/actions/actions.json) file for a detailed list. Available actions are:
   1. `grammar_correction`
@@ -273,7 +129,7 @@ The `display` strategy shows the output in a float window.
 `append` and `replace` modify the text directly in the buffer.
 
 ### Interactive popup
-When using `ChatGPT` and `ChatGPTEditWithInstructions`, the following
+When using `GPT4ALL` and `GPT4ALLEditWithInstructions`, the following
 keybindings are available:
 - `<C-Enter>` [Both] to submit.
 - `<C-y>` [Both] to copy/yank last answer.
