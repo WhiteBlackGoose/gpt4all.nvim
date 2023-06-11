@@ -2,7 +2,7 @@
   "complete_code": {
     "type": "chat",
     "opts": {
-      "template": "Complete the following code written in {{lang}} by pasting the existing code and continuing it. Do not explain it.\n\nExisting code:\n```{{filetype}}\n{{input}}\n```\n\n```{{filetype}}\n",
+      "template": "Complete the following code by pasting the existing code and continuing it, but do not write any explanations, only code is required. Do not write \"continue\" and alike words.\n\nExisting code:\n```{{filetype}}\n{{input}}\n```\n\n```{{filetype}}\n",
       "strategy": "replace",
       "params": {
         "model": "gpt-3.5-turbo",

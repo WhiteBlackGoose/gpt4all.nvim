@@ -2,6 +2,10 @@
 
 Fork of [ChatGPT.nvim](https://github.com/jackMort/ChatGPT.nvim).
 
+![](./demo2-cut.gif)
+
+> **WARNING**: this is a cut demo. In reality, it took almost 1.5 minutes to generate that code on my laptop.
+
 `gpt4all.nvim` is a Neovim plugin that allows you to interact with [gpt4all](https://github.com/nomic-ai/gpt4all) language model. Unlike ChatGPT, gpt4all is FOSS and does not require remote servers.
 
 ## Installation
