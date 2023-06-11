@@ -5,9 +5,10 @@ local logger = require("chatgpt.common.logger")
 local Api = {}
 
 -- API URL
-Api.COMPLETIONS_URL = "https://api.openai.com/v1/completions"
-Api.CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
-Api.EDITS_URL = "https://api.openai.com/v1/edits"
+Api.BASE_URL = "http://localhost:4891"
+Api.COMPLETIONS_URL = Api.BASE_URL .. "/v1/completions"
+Api.CHAT_COMPLETIONS_URL = Api.BASE_URL .. "/v1/chat/completions"
+Api.EDITS_URL = Api.BASE_URL .. "/v1/edits"
 
 function Api.completions(custom_params, cb)
   local params = vim.tbl_extend("keep", custom_params, Config.options.openai_params)
@@ -40,8 +41,6 @@ function Api.make_call(url, params, cb)
         url,
         "-H",
         "Content-Type: application/json",
-        "-H",
-        "Authorization: Bearer " .. Api.OPENAI_API_KEY,
         "-d",
         "@" .. TMP_MSG_FILENAME,
       },
@@ -92,21 +91,6 @@ function Api.close()
 end
 
 function Api.setup()
-  -- API KEY
-  Api.OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-  if not Api.OPENAI_API_KEY then
-    if Config.options.api_key_cmd ~= nil and Config.options.api_key_cmd ~= "" then
-      Api.OPENAI_API_KEY = vim.fn.system(Config.options.api_key_cmd)
-      if not Api.OPENAI_API_KEY then
-        logger.warn("Config 'api_key_cmd' did not return a value when executed")
-        return
-      end
-    else
-      logger.warn("OPENAI_API_KEY environment variable not set")
-      return
-    end
-  end
-  Api.OPENAI_API_KEY = Api.OPENAI_API_KEY:gsub("%s+$", "")
 end
 
 return Api
