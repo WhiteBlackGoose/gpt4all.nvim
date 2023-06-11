@@ -1,27 +1,15 @@
-# ChatGPT.nvim
+# gpt4all.nvim
 
-![GitHub Workflow Status](http://img.shields.io/github/actions/workflow/status/jackMort/ChatGPT.nvim/default.yml?branch=main&style=for-the-badge)
-![Lua](https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?style=for-the-badge&logo=lua)
+Fork of [ChatGPT.nvim](https://github.com/jackMort/ChatGPT.nvim).
 
-`ChatGPT` is a Neovim plugin that allows you to interact with OpenAI's GPT-3 language model.
-With `ChatGPT`, you can ask questions and get answers from GPT-3 in real-time.
+`gpt4all.nvim` is a Neovim plugin that allows you to interact with [gpt4all](https://github.com/nomic-ai/gpt4all) language model. Unlike ChatGPT, gpt4all is FOSS and does not require remote servers.
 
-![preview image](https://github.com/jackMort/ChatGPT.nvim/blob/media/preview-2.png?raw=true)
 ## Installation
-
-- Make sure you have `curl` installed.
-- Get an API key from OpenAI, which you can [obtain here](https://beta.openai.com/account/api-keys).
-
-The OpenAI API key can be provided in one of the following two ways:
-
-1. In the configuration option `api_key_cmd`, provide the path and arguments to
-   an executable that returns the API key via stdout.
-1. Setting it via an environment variable called `$OPENAI_API_KEY`.
 
 ```lua
 -- Packer
 use({
-  "jackMort/ChatGPT.nvim",
+  "WhiteBlackGoose/gpt4all.nvim",
     config = function()
       require("chatgpt").setup()
     end,
@@ -34,7 +22,7 @@ use({
 
 -- Lazy
 {
-  "jackMort/ChatGPT.nvim",
+  "WhiteBlackGoose/gpt4all.nvim",
     event = "VeryLazy",
     config = function()
       require("chatgpt").setup()
@@ -49,7 +37,7 @@ use({
 
 ## Configuration
 
-`ChatGPT.nvim` comes with the following defaults, you can override them by passing config as setup param
+`gpt4all.nvim` comes with the following defaults, you can override them by passing config as setup param
 
 ```lua
 {
@@ -190,36 +178,6 @@ use({
     show_quickfixes_cmd = "Trouble quickfix",
     predefined_chat_gpt_prompts = "https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv",
   }
-```
-
-### Secrets Management
-
-Providing the OpenAI API key via an environment variable is dangerous, as it
-leaves the API key easily readable by any process that can access the
-environment variables of other processes. In addition, it encourages the user
-to store the credential in clear-text in a configuration file.
-
-As an alternative to providing the API key via the `OPENAI_API_KEY` environment
-variable, the user is encouraged to use the `api_key_cmd` configuration option.
-The `api_key_cmd` configuration option takes a string, which is executed at
-startup, and whose output is used as the API key.
-
-The following configuration would use 1Passwords CLI, `op`, to fetch the API key
-from the `credential` field of the `OpenAI` entry.
-
-```lua
-require("chatgpt").setup({
-    api_key_cmd = "op read op://private/OpenAI/credential --no-newline"
-})
-```
-
-The following configuration would use GPG to decrypt a local file containing the
-API key
-
-```lua
-require("chatgpt").setup({
-    api_key_cmd = "gpg --decrypt ~/secret.txt.gpg 2>/dev/null"
-})
 ```
 
 ## Usage
